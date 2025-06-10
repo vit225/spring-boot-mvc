@@ -26,6 +26,7 @@ public class PetService {
         }
         pet.setId(++counterId);
         pets.put(pet.getId(), pet);
+
         userService.getUsers().get(pet.getUserId())
                 .getPets().add(pet);
         return pet;

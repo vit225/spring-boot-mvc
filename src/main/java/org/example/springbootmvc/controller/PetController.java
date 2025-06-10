@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/pets")
 public class PetController {
 
     private final PetService petService;
@@ -19,7 +20,7 @@ public class PetController {
         this.petService = petService;
     }
 
-    @PostMapping("/pets")
+    @PostMapping()
     public ResponseEntity<Pet> createPet(@RequestBody @Valid Pet pet) {
         log.info("Creating pet: {}", pet);
         Pet createdPet = petService.createPet(pet);
@@ -28,13 +29,13 @@ public class PetController {
                 .body(createdPet);
     }
 
-    @PutMapping("/pets/{id}")
+    @PutMapping("/{id}")
     public Pet updatePet(@RequestBody @Valid Pet pet, @PathVariable("id") long id) {
         log.info("Updating pet: {}", pet);
         return petService.updatePet(pet, id);
     }
 
-    @DeleteMapping("/pets/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePet(@PathVariable("id") long id) {
         petService.deletePet(id);
         return ResponseEntity
@@ -42,7 +43,7 @@ public class PetController {
                 .build();
     }
 
-    @GetMapping("/pets/{id}")
+    @GetMapping("/{id}")
     public Pet getPetById(@PathVariable("id") long id) {
         log.info("Getting pet by id: {}", id);
         return petService.getPetById(id);

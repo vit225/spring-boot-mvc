@@ -20,13 +20,12 @@ public class User {
     @NotNull
     private Integer age;
 
-    private List<Pet> pets;
+    private List<Pet> pets = new ArrayList<>();
 
     public User(String name, String email, Integer age) {
         this.name = name;
         this.email = email;
         this.age = age;
-        this.pets = new ArrayList<>();
     }
 
     public User() {

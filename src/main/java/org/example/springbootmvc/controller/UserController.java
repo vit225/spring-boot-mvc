@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
@@ -19,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/users")
+    @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody @Valid User user) {
         log.info("Creating user: {}", user);
         User createdUser = userService.createUser(user);
@@ -27,13 +28,13 @@ public class UserController {
                 .body(createdUser);
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") Long id, @RequestBody @Valid User user) {
         log.info("Updating user: {}", user);
         return userService.updateUser(id, user);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return ResponseEntity
@@ -41,7 +42,7 @@ public class UserController {
                 .build();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable("id") Long id) {
         log.info("Retrieving user by id: {}", id);
         return userService.getUserById(id);
