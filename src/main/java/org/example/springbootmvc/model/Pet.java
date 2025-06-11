@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public class Pet {
 
-    @Null
+    @Null(message = "не должно отправляться в теле запросе")
     private Long id;
 
     @NotBlank

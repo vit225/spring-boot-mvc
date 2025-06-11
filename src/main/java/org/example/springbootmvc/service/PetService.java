@@ -33,7 +33,11 @@ public class PetService {
     }
 
     public Pet updatePet(Pet pet, long id) {
-        Pet findPet = userService.getUsers().get(pet.getUserId())
+        if (pets.get(id) == null) {
+            throw new EntityNotFoundException("Pet not found with id " + id);
+        }
+
+        Pet findPet = userService.getUserById(pet.getUserId())
                 .getPets()
                 .stream()
                 .filter(p -> p.getId() == id)

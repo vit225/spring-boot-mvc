@@ -7,7 +7,7 @@ import java.util.List;
 
 public class User {
 
-    @Null
+    @Null(message = "не должно отправляться в теле запросе")
     private Long id;
 
     @Size(max = 50)
